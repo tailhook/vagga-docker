@@ -40,8 +40,8 @@ def main():
         "--tty",
         "--rm",
         ] + ports + [
-        "tailhook/vagga:latest",
-        "/vagga/bin/vagga",
+        "tailhook/vagga:v0.6.1",
+        "/vagga/vagga",
         "--ignore-owner-check", # this is needed on linux only
         ] + sys.argv[1:]
     log.info("Docker command-line: %r", command_line)
