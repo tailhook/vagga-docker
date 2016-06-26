@@ -10,7 +10,7 @@ class Vagga(object):
         if arguments.command:
             self.run_commands = [arguments.command[0]]
         else:
-            self.run_commands = arguments.run_multi
+            self.run_commands = arguments.run_multi or []
 
     def exposed_ports(self):
         return frozenset(self._exposed_ports())
