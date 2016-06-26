@@ -10,11 +10,12 @@ setup(name='vagga-docker',
       url='http://github.com/tailhook/vagga-docker',
       packages=['vagga_docker'],
       install_requires=[
-        'depends',
+        'docker-py',
+        'PyYaml',
       ],
       entry_points = {
           'console_scripts': ['vagga=vagga_docker.main:main'],
-      }
+      },
       classifiers=[
           'Development Status :: 4 - Beta',
           'Programming Language :: Python :: 3',
