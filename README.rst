@@ -13,7 +13,7 @@ This is a prototype which brings vagga as the first-class tool to OS X and
 Installation
 ============
 
-Currently it's::
+Currently it's (you need python >= 3.4)::
 
     $ pip install git+http://github.com/tailhook/vagrant-docker
     [ .. snip .. ]
