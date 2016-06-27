@@ -25,7 +25,7 @@ def main():
     cli = docker.Client()
 
     if not vagga.vagga_dir.exists():
-        os.mkdir(vagga.vagga_dir)
+        vagga.vagga_dir.mkdir()
 
     vagga.storage_volume = storage.get_volume(vagga, cli)
     ports = ["--publish={0}:{0}".format(port)
@@ -34,6 +34,7 @@ def main():
     command_line = [
         "docker", "run",
         "--volume={}:/work".format(vagga.base),
+        "--volume={}:/work/.vagga".format(vagga.storage_volume),
         "--workdir=/work/{}".format(suffix),
         "--privileged",
         "--interactive",

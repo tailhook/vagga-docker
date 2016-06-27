@@ -24,7 +24,7 @@ def get_volume(vagga, dock):
             log.debug("Volume info: %r", volume_info)
             return name
 
-    vol_name = vagga.base.parts[-1]
+    vol_name = 'vagga-' + vagga.base.parts[-1]
     try:
         dock.inspect_volume(vol_name)
     except docker.errors.NotFound:
