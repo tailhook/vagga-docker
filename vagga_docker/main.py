@@ -22,7 +22,7 @@ def main():
     args = arguments.parse_args()
 
     vagga = runtime.Vagga(path, cfg, args)
-    cli = docker.Client()
+    cli = docker.from_env(assert_hostname=False)
 
     if not vagga.vagga_dir.exists():
         vagga.vagga_dir.mkdir()
