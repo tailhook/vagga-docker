@@ -15,7 +15,7 @@ Installation
 
 Currently it's (you need python >= 3.4)::
 
-    $ pip install git+http://github.com/tailhook/vagrant-docker
+    $ pip install git+http://github.com/tailhook/vagga-docker
     [ .. snip .. ]
     $ vagga
     Available commands:
