@@ -1,5 +1,6 @@
 import os
 import sys
+import json
 import logging
 import docker
 
@@ -7,6 +8,7 @@ from . import config
 from . import storage
 from . import runtime
 from . import arguments
+from . import settings
 
 
 log = logging.getLogger(__name__)
@@ -21,6 +23,8 @@ def main():
     path, cfg, suffix = config.get_config()
     args = arguments.parse_args()
 
+    setting = settings.parse_all(path)
+
     vagga = runtime.Vagga(path, cfg, args)
     cli = docker.from_env(assert_hostname=False)
 
@@ -31,6 +35,11 @@ def main():
     ports = ["--publish={0}:{0}".format(port)
              for port in vagga.exposed_ports()]
 
+    str_settings = []
+    if setting:
+        str_settings.append("--env=VAGGA_SETTINGS=" + json.dumps(setting))
+        #TODO(tailhook) add volumes here
+
     command_line = [
         "docker", "run",
         "--volume={}:/work".format(vagga.base),
@@ -40,8 +49,9 @@ def main():
         "--interactive",
         "--tty",
         "--rm",
+        ] + str_settings + [
         ] + ports + [
-        "tailhook/vagga:v0.6.1",
+        "tailhook/vagga:v0.6.1-33-gacdf640",
         "/vagga/vagga",
         "--ignore-owner-check", # this is needed on linux only
         ] + sys.argv[1:]
