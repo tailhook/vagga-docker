@@ -1,3 +1,4 @@
+import os
 import yaml
 import pathlib
 import logging
@@ -16,7 +17,7 @@ def parse_all(vagga_base):
     base_str = str(vagga_base)
     settings = {}
     for filename in SETTING_FILES:
-        path = pathlib.Path.home() / filename
+        path = pathlib.Path(os.path.expanduser('~')) / filename
         if path.exists():
             with path.open('rb') as f:
                 try:
