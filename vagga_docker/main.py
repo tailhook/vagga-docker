@@ -35,10 +35,7 @@ def main():
     ports = ["--publish={0}:{0}".format(port)
              for port in vagga.exposed_ports()]
 
-    str_settings = []
-    if setting:
-        str_settings.append("--env=VAGGA_SETTINGS=" + json.dumps(setting))
-        #TODO(tailhook) add volumes here
+    setting['auto-apply-sysctl'] = True
 
     command_line = [
         "docker", "run",
@@ -49,9 +46,9 @@ def main():
         "--interactive",
         "--tty",
         "--rm",
-        ] + str_settings + [
+        "--env=VAGGA_SETTINGS=" + json.dumps(setting),
         ] + ports + [
-        "tailhook/vagga:v0.6.1-33-gacdf640",
+        "tailhook/vagga:v0.6.1-44-gc32f05e",
         "/vagga/vagga",
         "--ignore-owner-check", # this is needed on linux only
         ] + sys.argv[1:]
