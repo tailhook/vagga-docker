@@ -1,2 +1,2 @@
 FROM scratch
-ADD vagga-0.6.1-33-gacdf640.tar.xz /
+ADD vagga-0.6.1-44-gc32f05e.tar.xz /
