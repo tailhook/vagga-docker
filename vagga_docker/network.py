@@ -35,7 +35,7 @@ def _validate_container(container_name, ports, cli):
     else:
         extra = {}
         absent = set(ports)
-        for port, value in info['NetworkSettings']['Ports'].items():
+        for port, value in (info['NetworkSettings']['Ports'] or {}).items():
             num, kind = port.split('/')
             if kind != 'tcp':
                 log.warning("Non tcp port %r", port)
@@ -48,7 +48,7 @@ def _validate_container(container_name, ports, cli):
             all_containers = cli.containers(filters=dict(status='running'))
             netw = 'container:' + container_name
             used_containers = [item['name']
-                               for item in lst
+                               for item in all_containers
                                if item['HostConfig']['NetworkMode'] == netw]
             if used_containers:
                 log.warning("Exposed ports don't match, extra %r, absent %r. "
@@ -56,7 +56,7 @@ def _validate_container(container_name, ports, cli):
                             "exposed ports. Running containers %r",
                             absent, extra, ', '.join(used_containers))
             else:
-                cli.remove_container(force=True)
+                cli.remove_container(container_name, force=True)
                 return False
 
         if info['State']['Running']:
