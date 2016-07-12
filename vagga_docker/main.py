@@ -4,11 +4,13 @@ import json
 import logging
 import docker
 
+from . import VAGGA_IMAGE
 from . import config
 from . import storage
 from . import runtime
 from . import arguments
 from . import settings
+from . import network
 
 
 log = logging.getLogger(__name__)
@@ -32,8 +34,8 @@ def main():
         vagga.vagga_dir.mkdir()
 
     vagga.storage_volume = storage.get_volume(vagga, cli)
-    ports = ["--publish={0}:{0}".format(port)
-             for port in vagga.exposed_ports()]
+
+    vagga.network_container = network.check_container(vagga, cli)
 
     setting['auto-apply-sysctl'] = True
 
@@ -46,9 +48,9 @@ def main():
         "--interactive",
         "--tty",
         "--rm",
+        "--net=container:" + vagga.network_container,
         "--env=VAGGA_SETTINGS=" + json.dumps(setting),
-        ] + ports + [
-        "tailhook/vagga:v0.6.1-44-gc32f05e",
+        VAGGA_IMAGE,
         "/vagga/vagga",
         "--ignore-owner-check", # this is needed on linux only
         ] + sys.argv[1:]
