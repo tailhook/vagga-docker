@@ -3,6 +3,7 @@ import sys
 import json
 import logging
 import docker
+import subprocess
 
 from . import VAGGA_IMAGE
 from . import config
@@ -14,6 +15,14 @@ from . import network
 
 
 log = logging.getLogger(__name__)
+
+
+def pull_container(cli, image):
+    try:
+        info = cli.inspect_image(image)
+    except docker.errors.NotFound:
+        # Use command-line so that we don't have to reimplement progressbar
+        subprocess.check_call(["docker", "pull", VAGGA_IMAGE])
 
 
 def main():
@@ -32,6 +41,8 @@ def main():
 
     if not vagga.vagga_dir.exists():
         vagga.vagga_dir.mkdir()
+
+    pull_container(cli, VAGGA_IMAGE)
 
     vagga.storage_volume = storage.get_volume(vagga, cli)
 
