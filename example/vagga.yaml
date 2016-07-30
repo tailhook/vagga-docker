@@ -1,0 +1,15 @@
+#
+# Sample Vagga config for installing and running Redis Server v3.0
+# in Ubuntu xenial box.
+#
+
+containers:
+  py:
+    setup:
+    - !Alpine v3.4
+    - !Install [python3]
+
+commands:
+  py: !Command
+    container: py
+    run: [python3, -V]

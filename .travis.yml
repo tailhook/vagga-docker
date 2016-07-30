@@ -11,6 +11,7 @@ matrix:
     - os: osx
 script: |
     if [[ $TRAVIS_OS_NAME != osx ]]; then
-        vagga
+        cd example
+        test "$(vagga py)" = "Python 3.5.1"
     fi
 
