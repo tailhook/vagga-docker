@@ -1,0 +1,11 @@
+language: python
+python:
+- "3.4"
+install: "pip install ."
+
+matrix:
+  include:
+    - os: linux
+      dist: trusty
+      sudo: required
+    - os: osx
