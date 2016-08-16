@@ -21,6 +21,21 @@ Currently it's (you need python >= 3.4)::
     Available commands:
         run
 
+.. _docker-for-mac:
+
+**WARNING:** ensure that docker that you're running is docker for mac, and
+not any other docker running by docker-machine or vagrant. Probably do this
+by running::
+
+    printenv DOCKER_HOST
+
+If this returns non-empty string run::
+
+    unset DOCKER_HOST
+
+But this only cleans environment **for current shell**. So you must fix your
+docker host where it is defined.
+
 
 
 Short FAQ
