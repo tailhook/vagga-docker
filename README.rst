@@ -36,6 +36,12 @@ If this returns non-empty string run::
 But this only cleans environment **for current shell**. So you must fix your
 docker host where it is defined.
 
+For the reference, error usually looks like this::
+
+   Config not found in path "/work"
+
+(while the config actually there, basically it means docker doesn't see the
+volume from your host system)
 
 
 Short FAQ
