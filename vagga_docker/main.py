@@ -61,6 +61,7 @@ def main():
         "--rm",
         "--net=container:" + vagga.network_container,
         "--env=VAGGA_SETTINGS=" + json.dumps(setting),
+        "--env=RUST_BACKTRACE=1",
         VAGGA_IMAGE,
         "/vagga/vagga",
         "--ignore-owner-check", # this is needed on linux only
