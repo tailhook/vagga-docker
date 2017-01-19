@@ -1,1 +1,1 @@
-VAGGA_IMAGE = "tailhook/vagga:v0.6.1-246-gff88cdd"
+VAGGA_IMAGE = "tailhook/vagga:v0.7.0"

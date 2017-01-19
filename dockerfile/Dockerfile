@@ -1,2 +1,2 @@
 FROM scratch
-ADD vagga-0.6.1-246-gff88cdd.tar.xz /
+ADD vagga-0.7.0.tar.xz /
