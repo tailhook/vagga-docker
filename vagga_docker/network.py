@@ -33,7 +33,7 @@ def _validate_container(container_name, ports, cli):
         log.debug("No such container %r", container_name)
         return False
     else:
-        extra = {}
+        extra = set()
         absent = set(ports)
         for port, value in (info['NetworkSettings']['Ports'] or {}).items():
             num, kind = port.split('/')
