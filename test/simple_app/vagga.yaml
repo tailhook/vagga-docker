@@ -1,0 +1,16 @@
+containers:
+  test_simple_flask:
+    setup:
+    - !Alpine v3.5
+    - !Py3Install
+      - werkzeug==0.9.4
+      - MarkupSafe==0.23
+      - itsdangerous==0.22
+      - jinja2==2.7.2
+      - Flask==0.10.1
+commands:
+  run: !Command
+    description: Start the Flask development server
+    container: test_simple_flask
+    _expose-ports: [5000]
+    run: python3 simple_app.py

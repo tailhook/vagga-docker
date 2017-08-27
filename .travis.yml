@@ -1,0 +1,31 @@
+language: python
+
+services:
+  - docker
+
+python:
+- 3.6
+- 3.5
+- 3.4
+
+matrix:
+  include:
+    - os: linux
+
+    - os: osx
+      sudo: required
+      language: generic
+      before_install:
+        - brew update
+        - brew install python3
+        - virtualenv venv -p python3
+        - source venv/bin/activate
+
+install:
+  - pip install .
+
+script:
+  - pip install pytest-cov codecov
+  - py.test --cov=./ ./
+  - "echo alpine-mirror: http://mirrors.gigenet.com/alpinelinux/ > ~/.vagga.yaml"
+  - if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then cd test/simple_app && vagga _build test_simple_flask ; fi
