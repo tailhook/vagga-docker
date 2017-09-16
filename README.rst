@@ -7,8 +7,9 @@ Vagga in Docker
 This is a prototype which brings vagga as the first-class tool to OS X and
 (possibly) windows through docker's layer of compatibility.
 
-.. _tracking issue: https://github.com/tailhook/vagga-docker/issues/1
+Also see `Running in Gitlab`_
 
+.. _tracking issue: https://github.com/tailhook/vagga-docker/issues/1
 
 Installation
 ============
@@ -107,6 +108,23 @@ if this is possible, or viable)
 operations from docker into host system. For example list of commands will
 be executed by mac os. Also ``vagga _list``, some parts of ``vagga _clean`` and
 so on. But we will do our best to keep semantics exactly the same.
+
+
+Running in Gitlab
+=================
+
+To run a container on gitlab CI's docker infrastructure,
+use image ``tailhook/vagga:v0.7.2-93-g0884e15``, like this:
+
+.. _code-block: yaml
+
+    image: tailhook/vagga:v0.7.2-93-g0884e15
+
+    test:
+      script:
+      - vagga test
+
+Or check out `example-project <https://gitlab.com/tailhook/test_ci>`_
 
 
 LICENSE
