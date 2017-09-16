@@ -116,7 +116,7 @@ Running in Gitlab
 To run a container on gitlab CI's docker infrastructure,
 use image ``tailhook/vagga:v0.7.2-93-g0884e15``, like this:
 
-.. _code-block: yaml
+.. code-block:: yaml
 
     image: tailhook/vagga:v0.7.2-93-g0884e15
 
