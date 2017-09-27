@@ -1,7 +1,6 @@
 FROM scratch
 ADD vagga-0.8.0.tar.xz /
 ENV PATH=/vagga:/bin
-ENTRYPOINT ["/vagga/busybox", "sh", "-c"]
 RUN ["/vagga/busybox", "mkdir", "/bin"]
 RUN ["/vagga/busybox", "ln", "-vsfn", "/vagga/busybox", "/bin/sh"]
 RUN \
