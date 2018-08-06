@@ -1,5 +1,5 @@
 FROM scratch
-ADD vagga-0.8.0.tar.xz /
+ADD vagga-0.8.1.tar.xz /
 ENV PATH=/vagga:/bin
 RUN ["/vagga/busybox", "mkdir", "/bin"]
 RUN ["/vagga/busybox", "ln", "-vsfn", "/vagga/busybox", "/bin/sh"]
